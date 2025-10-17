@@ -159,6 +159,64 @@ export default function AvailabilityGrid({ team, userId, weekStart, onPrevWeek, 
     await setDoc(myDocRef, { grid: empty }, { merge: true });
   }
 
+    // --- touch support state ---
+    const [touchDragging, setTouchDragging] = useState(null); // true=select, false=unselect, null=no drag
+    const touchStateRef = React.useRef({ lastCid: null });
+  
+    // helper to toggle a cell by indices with throttling for touch-drag
+    async function toggleCellIfNeeded(d, t, want) {
+      const cid = cellId(d, t);
+      const current = !!myGrid[cid];
+      if (want === undefined) {
+        await toggleCell(d, t);
+        return;
+      }
+      if (current !== want) {
+        await toggleCell(d, t);
+      }
+      touchStateRef.current.lastCid = cid;
+    }
+  
+    // convert a touched element to grid coords (uses data-d / data-t on <td>)
+    function getCellFromTouchEvent(e) {
+      const touch = e.touches && e.touches[0];
+      if (!touch) return null;
+      const el = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (!el) return null;
+      const td = el.closest && el.closest("td[data-d][data-t]");
+      if (!td) return null;
+      const d = Number(td.dataset.d);
+      const t = Number(td.dataset.t);
+      if (Number.isNaN(d) || Number.isNaN(t)) return null;
+      return { d, t, cid: cellId(d, t) };
+    }
+  
+    // touch handlers
+    function onTouchStartCell(d, t, e) {
+      e.preventDefault();
+      const cid = cellId(d, t);
+      const selectMode = !myGrid[cid];
+      setTouchDragging(selectMode);
+      toggleCellIfNeeded(d, t, selectMode);
+    }
+  
+    function onTouchMoveGrid(e) {
+      if (touchDragging === null) return;
+      e.preventDefault();
+      const hit = getCellFromTouchEvent(e);
+      if (!hit) return;
+      const { d, t, cid } = hit;
+      if (cid === touchStateRef.current.lastCid) return;
+      toggleCellIfNeeded(d, t, touchDragging);
+    }
+  
+    function onTouchEndGrid() {
+      setTouchDragging(null);
+      touchStateRef.current.lastCid = null;
+    }
+  
+  
+
   // Counts & suggestions
   const counts = useMemo(()=>computeCounts(Object.values(teamGrids)),[teamGrids]);
   const displayCounts = useMemo(()=> showOverlay ? counts : {}, [counts, showOverlay]);
@@ -237,15 +295,23 @@ export default function AvailabilityGrid({ team, userId, weekStart, onPrevWeek, 
                       const mine = !!myGrid[cid];
                       const c = displayCounts[cid]||0; // respects overlay toggle
                       return (
-                        <td key={cid}
-                            className={`cell ${mine?"mine":""}`}
-                            data-count={c}
-                            onMouseDown={()=>onMouseDown(d,t)}
-                            onMouseEnter={()=>onEnter(d,t)}
-                            onClick={()=>toggleCell(d,t)}
+                        <td
+                          key={cid}
+                          className={`cell ${mine ? "mine" : ""}`}
+                          data-count={c}
+                          data-d={d}
+                          data-t={t}
+                          onMouseDown={()=>onMouseDown(d,t)}
+                          onMouseEnter={()=>onEnter(d,t)}
+                          onClick={()=>toggleCell(d,t)}
+                          onTouchStart={(e)=>onTouchStartCell(d,t,e)}
+                          onTouchMove={onTouchMoveGrid}
+                          onTouchEnd={onTouchEndGrid}
+                          onTouchCancel={onTouchEndGrid}
                         >
                           {showOverlay && c>0 && <span className="count">{c}</span>}
                         </td>
+
                       );
                     })}
                   </tr>

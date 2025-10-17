@@ -352,3 +352,36 @@ d
 .pill.selected:hover {
   background: #e2e6ea;
 }
+
+/* Improve mobile touch behavior */
+html { -webkit-text-size-adjust: 100%; }
+* { touch-action: manipulation; }
+
+/* Make the main row stack on small screens */
+@media (max-width: 820px) {
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  #grid-wrap, #cal-grid-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .grid .cell, .cal-grid .cell {
+    width: 44px;
+    height: 34px;
+  }
+  .grid .time, .cal-grid .time {
+    position: sticky;
+    left: 0;
+    background: #f9f9f9;
+    z-index: 1;
+  }
+  .suggestions { margin-top: 8px; }
+}
+
+/* Prevent iOS zoom on form controls */
+button, input, select, textarea, label {
+  font-size: 16px;
+}
