@@ -34,7 +34,7 @@ export default function TeamSelect({ teams, passwords, onPick }) {
 
   return (
     <div>
-      <h2>Stap 1) Kies je ploeg</h2>
+      <h2>Kies je ploeg</h2>
 
       <div className="pill-list" style={{ marginBottom: 12 }}>
         {teams.map(t => (

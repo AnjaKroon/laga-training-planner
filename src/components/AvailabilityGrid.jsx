@@ -198,7 +198,7 @@ export default function AvailabilityGrid({ team, userId, weekStart, onPrevWeek, 
         <div>
           <button onClick={onBack}>← Terug</button>
           {/* Split header across lines for clarity */}
-          <h2 style={{marginBottom:4}}>Stap 3) Vul je beschikbaarheid in</h2>
+          <h2 style={{marginBottom:4}}>Vul je beschikbaarheid in</h2>
           
 
           {/* Controls: week nav, overlay toggle, clear */}

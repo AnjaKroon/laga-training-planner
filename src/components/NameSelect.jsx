@@ -4,7 +4,7 @@ export default function NameSelect({ team, onPick, onBack }) {
   return (
     <div>
       <button onClick={onBack}>← Terug</button>
-      <h2>Stap 2) Kies je naam ({team.name})</h2>
+      <h2>Kies je naam ({team.name})</h2>
       <div className="pill-list">
         {team.members.map(m=>(
           <button key={m} className="pill" onClick={()=>onPick(m)}>
