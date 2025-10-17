@@ -63,7 +63,7 @@ export default function App() {
           onBack={()=>setUserId(null)}
         />
       )}
-      <footer>v1 • be nice to the website please 🙃</footer>
+      <footer>v1 • it's in dev 🙃</footer>
     </div>
   );
 }
