@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>Laga Herfst Ploegen Trainings Planner (beta)</h1>
+      <h1>Herfst Ploegen 🍂 Trainings Planner </h1>
 
       {!teamId && (
         <TeamSelect
