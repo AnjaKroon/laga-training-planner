@@ -5,15 +5,57 @@ import AvailabilityGrid from "./components/AvailabilityGrid.jsx";
 
 // Teams + simple Dutch-city passwords
 const TEAMS = [
-  { id: "4pA", name: "4+ Ploeg A", members: ["anja","isa","tessa","saskia","marta","myrthe", "marjolein"] },
-  { id: "4pB", name: "4+ Ploeg B", members: ["anja","rosa","freija","florien","anniek","simone", "marta", "jadey"] },
-  { id: "2xA", name: "2x Ploeg C", members: ["guusje","laurens","aron","sebas","anja", "rosa"] },
+  { 
+    id: "2xA", 
+    name: "2x Herfst Ploeg A", 
+    members: ["Pelt", "Wolfelaar", "Tangelder", "Meeuwesen", "Baltissen"] 
+  },
+  { 
+    id: "2xB", 
+    name: "2x Herfst Ploeg B", 
+    members: ["Osinga", "Klei", "Morselt", "Reeuwijk", "Linger"] 
+  },
+  { 
+    id: "2xC", 
+    name: "2x Herfst Ploeg C", 
+    members: ["Dabekausen", "Verburg", "Kroon", "Beunderman", "Faassen"] 
+  },
+  { 
+    id: "2xD", 
+    name: "2x Herfst Ploeg D", 
+    members: ["Leijsje", "Beetsma", "Smit", "Wiebinga", "Willems"] 
+  },
+  { 
+    id: "4pE", 
+    name: "4+ Herfst Ploeg E", 
+    members: ["Morselt", "de Jong", "Kollen", "Voppen", "Chen", "van breemen", "sterk", "Linger"] 
+  },
+  { 
+    id: "4pF", 
+    name: "4+ Herfst Ploeg F", 
+    members: ["Patandin", "Van Zanten", "Schooneman", "Nieuwhuisen", "Kortekaas", "Plank", "Groeneveld", "Ittersum"] 
+  },
+  { 
+    id: "4pG", 
+    name: "4+ Herfst Ploeg G", 
+    members: ["Florian Steinborn", "Kane Bloemers", "Tim Hohlbein", "Lowie Boons", "Schuijt", "Rhoon"] 
+  },
+  {
+    id: "2xH",
+    name: "de ORC",
+    members: ["Guusje", "Rosa", "Anja", "Sebas", "Aron", "Laurens", "Gijs"] 
+  }
 ];
 
 const TEAM_PASSWORDS = {
-  "4pA": "Utrecht",
-  "4pB": "Leiden",
-  "2xA": "Delft",
+  "2xA": "Utrecht",
+  "2xB": "Leiden",
+  "2xC": "Delft",
+  "2xD": "Amsterdam",
+  "4pE": "Rotterdam",
+  "4pF": "Haarlem",
+  "4pG": "Eindhoven",
+  "2xH": "VoRC",
 };
 
 function weekStart(date = new Date()) {
