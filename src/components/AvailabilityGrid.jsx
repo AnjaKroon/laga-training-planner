@@ -9,8 +9,8 @@ doc, setDoc, onSnapshot, collection, query, getDoc
    Helpers (team logic + UI)
    ========================= */
 const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-const START_HOUR = 9;     // 09:00
-const SLOTS = 16;         // 9–17 in 30-min steps
+const START_HOUR = 8;     // 08:00
+const SLOTS = 20;         // 8–18 in 30-min steps
 const WINDOW = 3;         // 90 minutes = 3 slots
 const cellId = (d,t)=>`D${d}_T${t}`;
 
