@@ -28,7 +28,7 @@ function fmtYMD(d) { return d.toISOString().slice(0,10); }
 export default function App() {
   const [teamId, setTeamId] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [anchor, setAnchor] = useState(weekStart());
+  const [anchor, setAnchor] = useState(() => weekStart());
   const ws = useMemo(() => fmtYMD(anchor), [anchor]);
 
   const team = teamId ? TEAMS.find(t=>t.id===teamId) : null;
@@ -58,8 +58,16 @@ export default function App() {
           team={team}
           userId={userId}
           weekStart={ws}
-          onPrevWeek={()=>{ const d=new Date(anchor); d.setDate(d.getDate()-7); setAnchor(d); }}
-          onNextWeek={()=>{ const d=new Date(anchor); d.setDate(d.getDate()+7); setAnchor(d); }}
+          onPrevWeek={()=>{ 
+            const d = new Date(anchor); 
+            d.setDate(d.getDate() - 7); 
+            setAnchor(weekStart(d)); 
+          }}
+          onNextWeek={()=>{ 
+            const d = new Date(anchor); 
+            d.setDate(d.getDate() + 7); 
+            setAnchor(weekStart(d)); 
+          }}
           onBack={()=>setUserId(null)}
         />
       )}

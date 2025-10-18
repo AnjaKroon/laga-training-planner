@@ -113,7 +113,10 @@ export default function AvailabilityGrid({ team, userId, weekStart, onPrevWeek, 
   const [openCalKey, setOpenCalKey] = useState(null);     // calendar-card popover key
 
   const teamWeekKey = `${team.id}_${weekStart}`;
-  const myDocRef = doc(db, "availability", teamWeekKey, "users", userId);
+  const myDocRef = useMemo(() => 
+    doc(db, "availability", teamWeekKey, "users", userId), 
+    [teamWeekKey, userId]
+  );
 
   // Subscribe to team availability (whole team)
   useEffect(()=>{
