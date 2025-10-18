@@ -28,7 +28,7 @@ const TEAMS = [
   { 
     id: "4pE", 
     name: "4+ Herfst Ploeg E", 
-    members: ["Morselt", "de Jong", "Kollen", "Voppen", "Chen", "van breemen", "sterk", "Linger"] 
+    members: ["Morselt", "de Jong", "Kollen", "Voppen", "Chen", "van Breemen", "Sterk", "Linger"] 
   },
   { 
     id: "4pF", 
@@ -113,7 +113,7 @@ export default function App() {
           onBack={()=>setUserId(null)}
         />
       )}
-      <footer>v1 • it's in dev 🙃</footer>
+      <footer>v1 • in development • gemaakt door jullie ORC 😘</footer>
     </div>
   );
 }
